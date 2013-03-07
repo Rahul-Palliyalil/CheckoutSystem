@@ -1,16 +1,6 @@
 CheckoutSystem
 ==============
-Product code | Name
-| Price
-----------------------------------------------------------
-001
-| Travel Card Holder
-| £9.25
-002
-| Personalised cufflinks | £45.00
-003
-| Kids T-shirt
-| £19.95
+
 
 Our marketing team want to offer promotions as an incentive
 for our customers to purchase these items.
@@ -33,6 +23,7 @@ price = co.total
 
 Implement a checkout system that fulfills these
 requirements.
+
 
 Test data
 ---------
