@@ -19,7 +19,9 @@ Ruby):
 co = Checkout.new(promotional_rules)
 
 co.scan(item)
+
 co.scan(item)
+
 price = co.total
 
 Implement a checkout system that fulfills these
