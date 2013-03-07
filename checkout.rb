@@ -46,7 +46,7 @@ class Checkout
     
  
  def total
-   puts "Basket: #{@basket.join(",")}"
+   puts "\nBasket: #{@basket.join(",")}"
    return @promotional_rules.apply_rules(@basket)
  end  
 end
