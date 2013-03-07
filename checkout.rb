@@ -1,29 +1,32 @@
-require_relative 'item_list'
+require_relative 'item_list.rb'
 
 class Rules
   include ItemList
-
-  @count = 0
-  @total = 0
+  
   def apply_rules(basket)
-    @basket.each do |item|
+    count = 0
+    total = 0
+    basket.each do |item|
       if item == '001'
         count = count + 1
       end
      end
     if count >= 2
-      @@ITEM_LIST['001'] = 8.5
+      @@ITEMS_LIST['001'] = 8.50
+    else
+      @@ITEMS_LIST['001'] = 9.25
+    end  
+    basket.each do |item|
+      total = total + @@ITEMS_LIST[item]
     end
-    @basket.each do |item|
-      @total = @total + @@ITEM_LIST[item]
+    if total > 60
+      total -=  total * 0.10
     end
-    if @total > 60
-      @total -= @total * 0.10
-    end
-    return @total
+    return total.round(2)
   end
 end
 class Checkout
+  include ItemList
 
   def initialize(promotional_rules)
     @promotional_rules = promotional_rules
@@ -34,14 +37,34 @@ class Checkout
   def scan(item)
     if @@ITEMS_LIST.include? item 
       @basket << item
-    end  
+    end
   end
+
+  def clear
+    @basket.clear
+  end  
+    
  
  def total
-   @promotional_rules.apply_rules(@basket)
+   puts "Basket: #{@basket.join(",")}"
+   return @promotional_rules.apply_rules(@basket)
  end  
 end
 promotional_rules = Rules.new
 co = Checkout.new(promotional_rules)
-co.scan(1)
-co.scan(2)
+co.scan('001')
+co.scan('002')
+co.scan ('003')
+puts "Total Price Expected: #{co.total}"
+co.clear
+co.scan('001')
+co.scan('003')
+co.scan('001')
+puts "Total Price Expected: #{co.total}"
+co.clear
+co.scan('001')
+co.scan('002')
+co.scan('001')
+co.scan('003')
+puts "Total Price Expected: #{co.total}"
+
