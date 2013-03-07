@@ -1,4 +1,4 @@
-require_relative 'item_list.rb'
+require_relative 'item_list'
 
 class Rules
   include ItemList
@@ -25,6 +25,7 @@ class Rules
     return total.round(2)
   end
 end
+
 class Checkout
   include ItemList
 
@@ -50,6 +51,7 @@ class Checkout
    return @promotional_rules.apply_rules(@basket)
  end  
 end
+
 promotional_rules = Rules.new
 co = Checkout.new(promotional_rules)
 co.scan('001')
